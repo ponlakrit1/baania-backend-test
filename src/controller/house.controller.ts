@@ -36,7 +36,13 @@ export class HouseController {
     async update(request: Request, response: Response, next: NextFunction) {
         const { id, name, desc, price, post_code } = request.body;
 
-        const house = Object.assign(new House(), {
+        const house = await this.houseRepository.findOneBy({ id })
+
+        if (!house) {
+            return "house not exist"
+        }
+
+        const houseUpdate = Object.assign(new House(), {
             id,
             name,
             desc,
@@ -44,7 +50,7 @@ export class HouseController {
             post_code
         })
 
-        return this.houseRepository.save(house)
+        return this.houseRepository.save(houseUpdate)
     }
 
     async getPostCode(request: Request, response: Response, next: NextFunction) {
@@ -106,15 +112,15 @@ export class HouseController {
     async remove(request: Request, response: Response, next: NextFunction) {
         const id = parseInt(request.params.id)
 
-        let userToRemove = await this.houseRepository.findOneBy({ id })
+        const house = await this.houseRepository.findOneBy({ id })
 
-        if (!userToRemove) {
+        if (!house) {
             return "house not exist"
         }
 
-        await this.houseRepository.remove(userToRemove)
+        await this.houseRepository.remove(house)
 
-        return "house has been removed"
+        return house
     }
     
 }
