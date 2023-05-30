@@ -1,4 +1,4 @@
-# Awesome Project Build with TypeORM
+# Baania backend test Project Build with TypeORM
 
 Steps to run this project:
 
