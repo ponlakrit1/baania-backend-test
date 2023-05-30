@@ -1,5 +1,6 @@
 import * as express from "express"
 import * as bodyParser from "body-parser"
+import * as cors from 'cors';
 import { Request, Response } from "express"
 import { AppDataSource } from "./data-source"
 import { Routes } from "./routes"
@@ -9,6 +10,14 @@ AppDataSource.initialize().then(async () => {
     // create express app
     const app = express()
     app.use(bodyParser.json())
+
+    const allowedOrigins = ['https://codetest-pre-interview-frontend.pages.dev'];
+    const options: cors.CorsOptions = {
+        origin: allowedOrigins
+    };
+
+    // Allow Access-Control-Allow-Origin
+    app.use(cors(options));
 
     // register express routes from defined application routes
     Routes.forEach(route => {
