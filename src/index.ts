@@ -11,7 +11,10 @@ AppDataSource.initialize().then(async () => {
     const app = express()
     app.use(bodyParser.json())
 
-    const allowedOrigins = ['https://codetest-pre-interview-frontend.pages.dev'];
+    const allowedOrigins = [
+        'https://codetest-pre-interview-frontend.pages.dev',
+        'http://localhost:4200'
+    ];
     const options: cors.CorsOptions = {
         origin: allowedOrigins
     };

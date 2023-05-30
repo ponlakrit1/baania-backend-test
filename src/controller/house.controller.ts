@@ -10,7 +10,7 @@ export class HouseController {
         const skip = request.query.skip;
         const take = request.query.take;
 
-        const data = await this.houseRepository.find({skip, take})
+        const data = await this.houseRepository.find({skip, take, order: {id: 'ASC'}})
 
         const res = {
             payload: data,
