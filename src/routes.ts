@@ -14,6 +14,12 @@ export const Routes = [
         action: "save"
     },
     {
+        method: "patch",
+        route: "/home/:id",
+        controller: HouseController,
+        action: "update"
+    },
+    {
         method: "get",
         route: "/postCode",
         controller: HouseController,

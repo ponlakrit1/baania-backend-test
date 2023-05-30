@@ -33,6 +33,20 @@ export class HouseController {
         return this.houseRepository.save(house)
     }
 
+    async update(request: Request, response: Response, next: NextFunction) {
+        const { id, name, desc, price, post_code } = request.body;
+
+        const house = Object.assign(new House(), {
+            id,
+            name,
+            desc,
+            price,
+            post_code
+        })
+
+        return this.houseRepository.save(house)
+    }
+
     async getPostCode(request: Request, response: Response, next: NextFunction) {
         const data = await this.houseRepository.createQueryBuilder().
                                                 select(['a.post_code']).
